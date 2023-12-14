@@ -2,24 +2,35 @@ package com.test.kipaskipas.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
-@Table(name = "order")
-public class Order {
+@Table(name = "\"order\"", schema = "public")
+public class Order implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "orderid", nullable = false)
-    private String orderid;
+    private String orderId;
 
-    @Column(name = "customerid")
-    private String customerid;
+    @Column(name = "customerid", insertable = false, updatable = false)
+    private String customerId;
 
     @Column(name = "customername")
-    private String customername;
+    private String customerName;
 
     @Column(name = "amount")
     private BigDecimal amount;
@@ -27,53 +38,58 @@ public class Order {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "productid")
-    private String productid;
+    @Column(name = "productid", insertable = false, updatable = false)
+    private String productId;
 
-    @Column(name = "orderdata")
-    private Instant orderdata;
+    @Column(name = "orderdate")
+    private Instant orderDate;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customerid")
     private Customer customer;
 
-    public Order() {
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Product> products;
 
+    public Order() {
     }
 
-    public Order(String orderid, String customerid, String customername, BigDecimal amount, Integer quantity, String productid, Instant orderdata, Customer customer) {
-        this.orderid = orderid;
-        this.customerid = customerid;
-        this.customername = customername;
+    public Order(String orderId, String customerId, String customerName, BigDecimal amount,
+                 Integer quantity, String productId, Instant orderDate, Customer customer,
+                 List<Product> products) {
+        this.orderId = orderId;
+        this.customerId = customerId;
+        this.customerName = customerName;
         this.amount = amount;
         this.quantity = quantity;
-        this.productid = productid;
-        this.orderdata = orderdata;
+        this.productId = productId;
+        this.orderDate = orderDate;
         this.customer = customer;
+        this.products = products;
     }
 
-    public String getOrderid() {
-        return orderid;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setOrderid(String orderid) {
-        this.orderid = orderid;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public String getCustomerid() {
-        return customerid;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerid(String customerid) {
-        this.customerid = customerid;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
-    public String getCustomername() {
-        return customername;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setCustomername(String customername) {
-        this.customername = customername;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public BigDecimal getAmount() {
@@ -92,20 +108,20 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public String getProductid() {
-        return productid;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setProductid(String productid) {
-        this.productid = productid;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public Instant getOrderdata() {
-        return orderdata;
+    public Instant getOrderDate() {
+        return orderDate;
     }
 
-    public void setOrderdata(Instant orderdata) {
-        this.orderdata = orderdata;
+    public void setOrderDate(Instant orderDate) {
+        this.orderDate = orderDate;
     }
 
     public Customer getCustomer() {
@@ -115,4 +131,15 @@ public class Order {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+
+
 }

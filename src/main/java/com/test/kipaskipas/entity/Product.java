@@ -2,48 +2,69 @@ package com.test.kipaskipas.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "product")
-public class Product {
+@Table(name = "product", schema = "public")
+public class Product implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "productid", nullable = false)
-    private String productid;
+    private String productId;
 
     @Column(name = "productprice")
-    private String productprice;
+    private String productPrice;
 
     @Column(name = "productdescription")
-    private String productdescription;
+    private String productDescription;
 
     @Column(name = "stock")
     private Integer stock;
 
-    public String getProductid() {
-        return productid;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+    public Product() {
     }
 
-    public void setProductid(String productid) {
-        this.productid = productid;
+    public Product(String productId, String productPrice, String productDescription, Integer stock) {
+        this.productId = productId;
+        this.productPrice = productPrice;
+        this.productDescription = productDescription;
+        this.stock = stock;
     }
 
-    public String getProductprice() {
-        return productprice;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setProductprice(String productprice) {
-        this.productprice = productprice;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public String getProductdescription() {
-        return productdescription;
+    public String getProductPrice() {
+        return productPrice;
     }
 
-    public void setProductdescription(String productdescription) {
-        this.productdescription = productdescription;
+    public void setProductPrice(String productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
     public Integer getStock() {
