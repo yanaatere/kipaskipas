@@ -2,6 +2,7 @@ package com.test.kipaskipas.controller;
 
 import com.test.kipaskipas.dto.ProductDto;
 import com.test.kipaskipas.dto.ResponseBase;
+import com.test.kipaskipas.dto.request.ProductInsertRequestDto;
 import com.test.kipaskipas.service.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,17 +23,17 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseBase getById(@PathVariable String id){
+    public ResponseBase<ProductDto> getById(@PathVariable String id){
         return productService.getByProductId(id);
     }
 
     @PutMapping()
-    public ResponseBase editProduct(@RequestBody ProductDto productDto){
+    public ResponseBase<ProductDto> editProduct(@RequestBody ProductDto productDto){
         return productService.editProduct(productDto);
     }
 
     @PostMapping
-    public ResponseBase addProduct(@RequestBody ProductDto productDto){
+    public ResponseBase<String> addProduct(@RequestBody ProductInsertRequestDto productDto){
         return productService.addProduct(productDto);
     }
 }

@@ -1,34 +1,19 @@
-package com.test.kipaskipas.dto;
-
-import com.test.kipaskipas.entity.Customer;
+package com.test.kipaskipas.dto.request;
 
 import java.io.Serializable;
 
-/**
- * DTO for {@link Customer}
- */
-public class CustomerDto implements Serializable {
-    private String customerId;
+public class CustomerInsertRequestDto implements Serializable {
     private String customerName;
     private String address;
     private Integer phone;
 
-    public CustomerDto() {
+    public CustomerInsertRequestDto() {
     }
 
-    public CustomerDto(String customerId, String customerName, String address, Integer phone) {
-        this.customerId = customerId;
+    public CustomerInsertRequestDto(String customerName, String address, Integer phone) {
         this.customerName = customerName;
         this.address = address;
         this.phone = phone;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
     }
 
     public String getCustomerName() {
@@ -58,7 +43,6 @@ public class CustomerDto implements Serializable {
     @Override
     public String toString() {
         return "CustomerDto{" +
-                "customerId='" + customerId + '\'' +
                 ", customerName='" + customerName + '\'' +
                 ", address='" + address + '\'' +
                 ", phone=" + phone +

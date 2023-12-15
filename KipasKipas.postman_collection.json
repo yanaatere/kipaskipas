@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "b7c10965-c8c5-439e-9694-24b70a342d03",
+		"name": "KipasKipas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "10729399"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/customer/C001"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerName\": \"Sumar Khubam\",\r\n    \"address\": \"Bangalore\",\r\n    \"phone\": 628963\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/customer"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\":\"d2b1bc70-e61b-42b2-9438-6dbc92b9d9a2\",\r\n    \"customerName\": \"Kumar Shubham\",\r\n    \"address\": \"Bangalore\",\r\n    \"phone\": 628901\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/customer"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/product/68e4ea13-1189-4dd9-919d-4a9d20c52462"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productPrice\": \"29.99\",\r\n    \"productDescription\": \"Example product description.\",\r\n    \"stock\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/product"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"68e4ea13-1189-4dd9-919d-4a9d20c52462\",\r\n    \"productPrice\": \"29.99\",\r\n    \"productDescription\": \"Coca Cola\",\r\n    \"stock\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/product"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "FailedCreateOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": \"d2b1bc70-e61b-42b2-9438-6dbc92b9d9a2\",\r\n    \"productId\": \"d80192f7-8738-4035-aa62-823e8f4b5d1a\",\r\n    \"amount\": 50.00,\r\n    \"quantity\": 150\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/order"
+					},
+					"response": []
+				},
+				{
+					"name": "SuccessCreateOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": \"C001\",\r\n    \"productId\": \"P001\",\r\n    \"amount\": 50.00,\r\n    \"quantity\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/order"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

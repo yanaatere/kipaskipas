@@ -2,14 +2,9 @@ package com.test.kipaskipas.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "product", schema = "public")
@@ -29,9 +24,8 @@ public class Product implements Serializable {
     @Column(name = "stock")
     private Integer stock;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Order> orders;
 
     public Product() {
     }
@@ -74,5 +68,4 @@ public class Product implements Serializable {
     public void setStock(Integer stock) {
         this.stock = stock;
     }
-
 }

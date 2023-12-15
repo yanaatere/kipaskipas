@@ -9,13 +9,9 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.List;
 
 @Entity
 @Table(name = "\"order\"", schema = "public")
@@ -26,7 +22,7 @@ public class Order implements Serializable {
     @Column(name = "orderid", nullable = false)
     private String orderId;
 
-    @Column(name = "customerid", insertable = false, updatable = false)
+    @Column(name = "customerid")
     private String customerId;
 
     @Column(name = "customername")
@@ -38,25 +34,25 @@ public class Order implements Serializable {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "productid", insertable = false, updatable = false)
+    @Column(name = "productid")
     private String productId;
 
     @Column(name = "orderdate")
     private Instant orderDate;
 
     @ManyToOne
-    @JoinColumn(name = "customerid")
+    @JoinColumn(name = "customerid", insertable = false, updatable = false)
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Product> products;
+    @ManyToOne
+    @JoinColumn(name = "productid", insertable = false, updatable = false)
+    private Product product;
 
     public Order() {
     }
 
     public Order(String orderId, String customerId, String customerName, BigDecimal amount,
-                 Integer quantity, String productId, Instant orderDate, Customer customer,
-                 List<Product> products) {
+                 Integer quantity, String productId, Instant orderDate) {
         this.orderId = orderId;
         this.customerId = customerId;
         this.customerName = customerName;
@@ -64,8 +60,6 @@ public class Order implements Serializable {
         this.quantity = quantity;
         this.productId = productId;
         this.orderDate = orderDate;
-        this.customer = customer;
-        this.products = products;
     }
 
     public String getOrderId() {
@@ -128,18 +122,7 @@ public class Order implements Serializable {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public Product getProduct() {
+        return product;
     }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-
-
 }

@@ -2,6 +2,7 @@ package com.test.kipaskipas.service;
 
 import com.test.kipaskipas.dto.CustomerDto;
 import com.test.kipaskipas.dto.ResponseBase;
+import com.test.kipaskipas.dto.request.CustomerInsertRequestDto;
 import com.test.kipaskipas.entity.Customer;
 import com.test.kipaskipas.repository.CustomerRepository;
 import org.modelmapper.ModelMapper;
@@ -37,7 +38,7 @@ public class CustomerService {
         }
     }
 
-    public ResponseBase editProduct(CustomerDto editCustomer) {
+    public ResponseBase<CustomerDto> editProduct(CustomerDto editCustomer) {
         try {
             Optional<Customer> optionalCustomer = customerRepository.findByCustomerId(editCustomer.getCustomerId());
             if (optionalCustomer.isPresent()) {
@@ -56,7 +57,7 @@ public class CustomerService {
         }
     }
 
-    public ResponseBase addCustomer(CustomerDto addCustomer) {
+    public ResponseBase<String> addCustomer(CustomerInsertRequestDto addCustomer) {
         try {
             Customer customer = modelMapper.map(addCustomer, Customer.class);
             customerRepository.save(customer);

@@ -1,34 +1,20 @@
-package com.test.kipaskipas.dto;
-
-import com.test.kipaskipas.entity.Product;
+package com.test.kipaskipas.dto.request;
 
 import java.io.Serializable;
 
-/**
- * DTO for {@link Product}
- */
-public class ProductDto implements Serializable {
-    private String productId;
+
+public class ProductInsertRequestDto implements Serializable {
     private String productPrice;
     private String productDescription;
     private Integer stock;
 
-    public ProductDto() {
+    public ProductInsertRequestDto() {
     }
 
-    public ProductDto(String productId, String productPrice, String productDescription, Integer stock) {
-        this.productId = productId;
+    public ProductInsertRequestDto(String productPrice, String productDescription, Integer stock) {
         this.productPrice = productPrice;
         this.productDescription = productDescription;
         this.stock = stock;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
     }
 
     public String getProductPrice() {
@@ -58,7 +44,6 @@ public class ProductDto implements Serializable {
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
-                "productid = " + productId + ", " +
                 "productprice = " + productPrice + ", " +
                 "productdescription = " + productDescription + ", " +
                 "stock = " + stock + ")";
